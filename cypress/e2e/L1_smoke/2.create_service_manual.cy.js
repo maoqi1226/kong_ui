@@ -9,7 +9,6 @@ describe('L1: Manual Create Service', () => {
   const testScenarios = getManualCreateScenarios();
   testScenarios.forEach((scenario) => {
     it(`${scenario.description}`, {tags: "@smoke"}, () => {
-      console.log(`${scenario.payload}`);
       serviceListPage.visit().clickCreateServiceBtn();
       serviceCreatePage.fillFormManual(scenario.payload);
 

@@ -1,5 +1,4 @@
 import pages from '../../pages/index';
-import { faker } from "@faker-js/faker";
 import { getSimpleCreateScenarios } from "../../data/serviceCreateDataSimple.js";
 
 describe("L1: Simple Create Service", () => {

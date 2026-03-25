@@ -49,12 +49,11 @@ Page instances are managed through a centralized factory:
 pages.get("servicecreate")
 ```
 Benefits:
-* avoids repeated instantiation
-* ensures consistent access to page objects
-* improves code organization
+* Centralized instantiation: reduces duplicated imports across test files.
+* Test isolation: returns fresh instances to prevent state leakage between tests.
+* Easier maintenance: simplifies updates if a page's constructor changes.
 
 ## Test Data Strategy
-
 Dynamic test data is generated using **faker** to avoid collisions between test runs.
 This ensures:
 * tests remain independent
@@ -65,26 +64,26 @@ This ensures:
 ```
 kong-ui-automation/
 │
-├── cypress/                      # Cypress 主目录
+├── cypress/                     # Main Cypress directory
 │   │
-│   ├── e2e/                     # 测试用例
+│   ├── e2e/                     # Test cases
 │   │   ├── L1_smoke/
 │   │   ├── L2_functional/
 │   │   └── L3_extended/
 │   ├── pages/                   # Page Object Model
-│   ├── support/                 # 全局 hook（grep、日志等）
-│   └── data/                    # 动态数据生成
+│   ├── support/                 # Global hooks (grep, mocks, events)
+│   └── data/                    # Dynamic data generation
 │
-├── scripts/                     # 工程脚本（启动环境/清理环境）
-├── results/                     # 测试产物
+├── scripts/                     # Utility scripts (environment setup / teardown)
+├── results/                     # Test artifacts
 │   ├── screenshots/
 │   ├── videos/
 │   ├── reports/
 │   └── html-report/
 │
-├── cypress.config.js            # Cypress 配置
-├── package.json                 # npm scripts（运行入口）
-└── .env                         # 环境变量（KONG_URL等）
+├── cypress.config.js            # Cypress configuration
+├── package.json                 # npm scripts (execution entry points)
+└── .env                         # Environment variables (KONG_URL, etc.)
 ```
 
 # Environment Setup
