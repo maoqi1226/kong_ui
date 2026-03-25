@@ -14,11 +14,6 @@ describe('L3: Multi Fields Interaction Check', () => {
     cy.log("L3用例执行后清理");
   });
 
-  it('L3: cancel create service', () => {
-    serviceCreatePage.cancelForm();
-    cy.location("pathname").should('match', /\/services\/?$/);
-  })
-
   testData.forEach((data) => {
     it(`L3: ${data.description}`, () => {
       serviceCreatePage.fillFormSimple(data.payload)

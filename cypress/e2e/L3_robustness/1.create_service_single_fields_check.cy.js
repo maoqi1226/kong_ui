@@ -16,11 +16,6 @@ describe('L3: Single Fields Check', () => {
     cy.log("L3用例执行后清理");
   });
 
-  it('cancel create service', () => {
-    serviceCreatePage.cancelForm();
-    cy.location("pathname").should('match', /\/services\/?$/);
-  })
-
   testData.fullUrl.scenarios.forEach((data) => {
     it(`L3: Check Wrong Input for Full URL: ${data.input}`, () => {
       serviceCreatePage.switchMode(testData.fullUrl.mode);

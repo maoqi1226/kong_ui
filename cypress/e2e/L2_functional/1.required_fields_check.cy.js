@@ -25,7 +25,9 @@ describe('L2: Required Fields Check', () => {
     serviceCreatePage.element.serviceCreateSubmitBtn().should("be.disabled");
 
     serviceCreatePage.element.serviceUrlInput().type(data.fullUrl);
-    serviceCreatePage.element.serviceCreateSubmitBtn().should('not.be.disabled');
+    serviceCreatePage.element
+      .serviceCreateSubmitBtn()
+      .should("not.be.disabled");
   });
 
   it("L2: [Manual Create] Required Fields Check", () => {

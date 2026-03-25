@@ -19,26 +19,29 @@ describe('L2: Required Fields Check', () => {
     cy.location("pathname").should("match", /\/services\/?$/);
   });
 
+  console.log(`grep标签是：${Cypress.env("grep")}`);
   const testData = getSwitchModeCreateScenarios();
   testData.forEach((data) => {
-    it(`L2: Switch Manual to Simple Create & Submit`, () => {
-      serviceCreatePage.fillFormManual(data.manual.payload, false);
+    it(
+      `L2: Switch Manual to Simple Create & Submit`, () => {
+        serviceCreatePage.fillFormManual(data.manual.payload, false);
 
-      serviceCreatePage.fillFormSimple(data.simple.payload);
+        serviceCreatePage.fillFormSimple(data.simple.payload);
 
-      cy.url().should("include", "/default/services/");
-      serviceDetailPage.verifyFullUrl(data.simple.payload.fullUrl);
-      if (data.simple.payload.advancedFields) {
-        serviceDetailPage.verifyAdvanceFields(
-          data.simple.payload.advancedFields,
-        );
-      }
-      if (data.simple.payload.generalFields) {
-        serviceDetailPage.verifyGeneralFields(
-          data.simple.payload.generalFields,
-        );
-      }
-    });
+        cy.url().should("include", "/default/services/");
+        serviceDetailPage.verifyFullUrl(data.simple.payload.fullUrl);
+        if (data.simple.payload.advancedFields) {
+          serviceDetailPage.verifyAdvanceFields(
+            data.simple.payload.advancedFields,
+          );
+        }
+        if (data.simple.payload.generalFields) {
+          serviceDetailPage.verifyGeneralFields(
+            data.simple.payload.generalFields,
+          );
+        }
+      },
+    );
   });
 });
 

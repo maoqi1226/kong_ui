@@ -17,6 +17,7 @@
     "warn": "^1.0.1"
   },
   "devDependencies": {
+    "@cypress/grep": "^4.1.0",
     "cypress": "^15.12.0",
     "dotenv": "^17.3.1",
     "mochawesome": "^7.1.4",
@@ -32,6 +33,7 @@
     "clean:results": "rimraf results",
     "test:run": "cypress run --browser chrome --headless",
     "test:ui": "cypress run --browser chrome --headed",
+    "test:run:smoke": "cypress run --env grepTags=\"@smoke\",grepFilterSpecs=true,grepOmitFiltered=true",
     "report:merge": "mochawesome-merge results/reports/*.json > results/report.json",
     "report:generate": "marge results/report.json --reportDir results/html-report --inline",
     "test:report": "npm run clean:results && (npm run test:run; npm run report:merge; npm run report:generate)",

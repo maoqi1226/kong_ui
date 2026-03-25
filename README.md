@@ -82,7 +82,7 @@ kong-ui-automation/
 │   ├── reports/
 │   └── html-report/
 │
-├── cypress.config.ts            # Cypress 配置
+├── cypress.config.js            # Cypress 配置
 ├── package.json                 # npm scripts（运行入口）
 └── .env                         # 环境变量（KONG_URL等）
 ```
