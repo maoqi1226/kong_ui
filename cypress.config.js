@@ -1,4 +1,5 @@
 const { defineConfig } = require("cypress");
+const installLogsPrinter = require("cypress-terminal-report/src/installLogsPrinter");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -29,9 +30,8 @@ module.exports = defineConfig({
     allowCypressEnv: true,
 
     setupNodeEvents(on, config) {
-      // const registerGrep = grepPlugin.default || grepPlugin;
-      require("@cypress/grep/src/plugin")(config);
-
+      require("@cypress/grep/src/plugin")(config);   // grep plugin for filter test
+      installLogsPrinter(on, {printLogsToConsole: "onFail"});   // show log
       // browser launch config
       on("before:browser:launch", (browser, launchOptions) => {
         if (browser.name === "chrome") {

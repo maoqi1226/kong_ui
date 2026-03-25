@@ -19,7 +19,6 @@ describe('L2: Required Fields Check', () => {
     cy.location("pathname").should("match", /\/services\/?$/);
   });
 
-  console.log(`grep标签是：${Cypress.env("grep")}`);
   const testData = getSwitchModeCreateScenarios();
   testData.forEach((data) => {
     it(
