@@ -70,7 +70,7 @@ kong-ui-automation/
 │   │   ├── L2_functional/
 │   │   └── L3_extended/
 │   ├── pages/                   # Page Object Model
-│   ├── support/                 # Global hooks (grep, mocks, events)
+│   ├── support/                 # Global hooks (grep, mocks, events, commands)
 │   └── data/                    # Dynamic data generation
 │
 ├── scripts/                     # Utility scripts (environment setup / teardown)

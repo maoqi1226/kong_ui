@@ -1,5 +1,4 @@
 import pages from '../../pages/index';
-import { faker } from "@faker-js/faker";
 import { getManualFieldsScenarios } from "../../data/serviceL2Data.js";
 
 
