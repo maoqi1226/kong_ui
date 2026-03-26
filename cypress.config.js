@@ -15,12 +15,14 @@ module.exports = defineConfig({
   videoCompression: 32,
   trashAssetsBeforeRuns: true,
 
-  reporter: "mochawesome",
+  reporter: "cypress-mochawesome-reporter",
   reporterOptions: {
     reportDir: "results/reports",
-    overwrite: false,
+    overwrite: true,
     html: true,
-    json: true,
+    json: false,
+    embeddedScreenshots: true, // screenshot embedded in report html
+    inlineAssets: true, // report html can be opened independently
   },
 
   screenshotOnRunFailure: true,
@@ -30,8 +32,9 @@ module.exports = defineConfig({
     allowCypressEnv: true,
 
     setupNodeEvents(on, config) {
-      require("@cypress/grep/src/plugin")(config);   // grep plugin for filter test
-      installLogsPrinter(on, {printLogsToConsole: "onFail"});   // show log
+      require("@cypress/grep/src/plugin")(config); // grep plugin for filter test
+      installLogsPrinter(on, { printLogsToConsole: "onFail" }); // show log
+      require("cypress-mochawesome-reporter/plugin")(on);
       // browser launch config
       on("before:browser:launch", (browser, launchOptions) => {
         if (browser.name === "chrome") {

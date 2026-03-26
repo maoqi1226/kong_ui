@@ -2,7 +2,6 @@ import pages from '../../pages/index';
 import { getSimpleCreateScenarios } from "../../data/serviceCreateDataSimple.js";
 
 describe("L1: Simple Create Service", () => {
-  const overallPage = pages.get("overall");
   const serviceListPage = pages.get("servicelist");
   const serviceCreatePage = pages.get("servicecreate");
   const serviceDetailPage = pages.get("servicedetail");

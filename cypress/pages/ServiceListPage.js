@@ -1,6 +1,5 @@
-import BasePage from "./BasePage";
 
-class ServiceListPage extends BasePage {
+class ServiceListPage {
   get element() {
     return {
       title: () => cy.get(".title"),
@@ -12,9 +11,11 @@ class ServiceListPage extends BasePage {
   }
 
   visit() {
+    cy.intercept("GET", "**/default/services*").as("serviceListPage");
     cy.visit("/services");
     this.element.title().should("be.visible");
-    this.element.serviceList().should("be.visible");
+    cy.wait("@serviceListPage").its("response.statusCode").should("eq", 200);
+    // this.element.serviceList().should("be.visible");
     return this;
   }
 

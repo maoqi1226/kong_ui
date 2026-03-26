@@ -3,10 +3,7 @@ import { faker } from "@faker-js/faker";
 import { getSimpleCreateScenarios } from "../../data/serviceCreateDataSimple.js";
 
 describe('L2: Required Fields Check', () => {
-  const overallPage = pages.get("overall");
-  const serviceListPage = pages.get("servicelist");
   const serviceCreatePage = pages.get("servicecreate");
-  const serviceDetailPage = pages.get("servicedetail");
 
   beforeEach(() => {
     cy.log("L2用例执行前准备");

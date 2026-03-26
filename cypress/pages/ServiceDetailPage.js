@@ -1,3 +1,5 @@
+import { assertElementTextEquals } from "../support/helper.js";
+
 class ServiceDetailPage {
   get element() {
     return {
@@ -24,31 +26,32 @@ class ServiceDetailPage {
       headerActions: () => cy.get("[data-testid='header-actions']"),
     };
   }
-  _haveText(ele, text) {
-    if (text !== undefined && text !== null) {
-      ele().should("have.text", String(text));
-    }
-  }
+  
+  // _haveText(ele, text) {
+  //   if (text !== undefined && text !== null) {
+  //     ele().should("have.text", String(text));
+  //   }
+  // }
 
-  _containsText(ele, text, top_n=5) {
-    if (text !== undefined && text !== null) {
-      ele().contains(String(text).slice(0, top_n));
-    }
-  }
+  // _containsText(ele, text, top_n=5) {
+  //   if (text !== undefined && text !== null) {
+  //     ele().contains(String(text).slice(0, top_n));
+  //   }
+  // }
 
   verifyProtocolFields(data) {
-    this._haveText(this.element.protocolText, data.protocol);
-    this._haveText(this.element.hostText, data.host);
-    this._haveText(this.element.pathText, data.path);
-    this._haveText(this.element.portText, data.port);
+    assertElementTextEquals(this.element.protocolText, data.protocol);
+    assertElementTextEquals(this.element.hostText, data.host);
+    assertElementTextEquals(this.element.pathText, data.path);
+    assertElementTextEquals(this.element.portText, data.port);
   }
 
   verifyAdvanceFields(data) {
-    this._haveText(this.element.retriesText, data.retries);
-    this._haveText(this.element.connTimeoutText, data.connTimeout);
-    this._haveText(this.element.writeTimeoutText, data.writeTimeout);
-    this._haveText(this.element.readTimeoutText, data.readTimeout);
-    this._haveText(this.element.clientCertText, data.clientCert);
+    assertElementTextEquals(this.element.retriesText, data.retries);
+    assertElementTextEquals(this.element.connTimeoutText, data.connTimeout);
+    assertElementTextEquals(this.element.writeTimeoutText, data.writeTimeout);
+    assertElementTextEquals(this.element.readTimeoutText, data.readTimeout);
+    assertElementTextEquals(this.element.clientCertText, data.clientCert);
     // this._containsText(this.element.caCertText, data.caCert, 6);
     if (data.caCert){
       const caCertList = data.caCert.split(',').map((item) => item.trim());
@@ -63,7 +66,7 @@ class ServiceDetailPage {
   }
 
   verifyGeneralFields(data) {
-    this._haveText(this.element.serviceName, data.name);
+    assertElementTextEquals(this.element.serviceName, data.name);
     if (data.tags) {
       const tagList = data.tags.split(",").map((tag) => tag.trim());
       cy.wrap(tagList).each((tag) => {

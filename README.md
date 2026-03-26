@@ -32,7 +32,6 @@ cypress/pages
 Example page objects:
 
 ```
-BasePage
 ServiceListPage
 ServiceCreatePage
 ServiceDetailPage

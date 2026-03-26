@@ -1,6 +1,5 @@
-import BasePage from "./BasePage";
 
-class ServiceCreatePage extends BasePage {
+class ServiceCreatePage {
   get element() {
     return {
       fullUrlRadio: () => cy.get('[data-testid="gateway-service-url-radio"]'),
@@ -85,7 +84,7 @@ class ServiceCreatePage extends BasePage {
           ? this.element.tlsVerifyTrueOption().click()
           : this.element.tlsVerifyFalseOption().click();
       } else if (DATA_ELEMENT_MAPPING[key]) {
-        this.typeNum(DATA_ELEMENT_MAPPING[key](), value);
+        cy.typeNum(DATA_ELEMENT_MAPPING[key], value);
       } else {
         cy.log(`Warning: Unrecognized advanced field key: ${key}`);
       }
@@ -94,22 +93,22 @@ class ServiceCreatePage extends BasePage {
 
   _fillgeneralFieldsFields(generalFields) {
     if (generalFields.name) {
-      this.typeText(this.element.serviceNameInput(), generalFields.name);
+      cy.typeText(this.element.serviceNameInput, generalFields.name);
     }
     if (generalFields.tags) {
       this.element.addTagsTrigger().click();
-      this.typeText(this.element.tagsInput(), generalFields.tags);
+      cy.typeText(this.element.tagsInput, generalFields.tags);
     }
   }
 
   _fillFullUrl(text){
-    this.typeText(this.element.serviceUrlInput(), text);
+    cy.typeText(this.element.serviceUrlInput, text);
   }
 
   fillFormSimple(data) {
     this.switchMode("simple");
     this._fillFullUrl(data.fullUrl)
-    // this.typeText(this.element.serviceUrlInput(), data.fullUrl);
+    // cy.typeText(this.element.serviceUrlInput, data.fullUrl);
     if (data.advancedFields) {
       this.element.viewAdvancedFieldsTrigger().click();
       this._fillAdvancedFields(data.advancedFields);
@@ -117,7 +116,8 @@ class ServiceCreatePage extends BasePage {
     if (data.generalFields) {
       this._fillgeneralFieldsFields(data.generalFields);
     }
-    this.element.serviceCreateSubmitBtn().click();
+    this.submitForm();
+    // this.element.serviceCreateSubmitBtn().click();
   }
 
   _fillProtocolFields(protocolFields) {
@@ -131,13 +131,13 @@ class ServiceCreatePage extends BasePage {
       ).click();
     }
     // fill host, path, port
-    this.typeText(this.element.hostInput(), protocolFields.host);
+    cy.typeText(this.element.hostInput, protocolFields.host);
 
     if (protocolFields.path) {
-      this.typeText(this.element.pathInput(), protocolFields.path);
+      cy.typeText(this.element.pathInput, protocolFields.path);
     }
     if (protocolFields.port) {
-      this.typeNum(this.element.portInput(), protocolFields.port);
+      cy.typeNum(this.element.portInput, protocolFields.port);
     }
   }
   _expendAdvancedFields() {
@@ -157,8 +157,18 @@ class ServiceCreatePage extends BasePage {
   }
 
   submitForm() {
-    this.element.serviceCreateSubmitBtn().scrollIntoView().not("disabled").click();
+    cy.intercept("POST", "**/services").as("submitService");
+
+    this.element
+      .serviceCreateSubmitBtn()
+      .scrollIntoView()
+      .should("be.visible")
+      .and("not.be.disabled")
+      .click({force: true});
+
+    cy.wait("@submitService", {timeout: 8000}).its("request").should("exist");
   }
+
   cancelForm() {
     this.element.serviceCreateCancelBtn().not("disabled").click();
   }

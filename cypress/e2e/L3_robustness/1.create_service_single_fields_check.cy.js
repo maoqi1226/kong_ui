@@ -4,7 +4,6 @@ import { faker } from "@faker-js/faker";
 
 describe('L3: Single Fields Check', () => {
   const serviceCreatePage = pages.get("servicecreate");
-  const serviceDetailPage = pages.get("servicedetail");
   const testData = getSingleFieldsScenarios();
 
   beforeEach(() => {
@@ -19,10 +18,7 @@ describe('L3: Single Fields Check', () => {
   testData.fullUrl.scenarios.forEach((data) => {
     it(`L3: Check Wrong Input for Full URL: ${data.input}`, () => {
       serviceCreatePage.switchMode(testData.fullUrl.mode);
-      serviceCreatePage.typeText(
-        serviceCreatePage.element.serviceUrlInput(),
-        data.input,
-      );
+      cy.typeText(serviceCreatePage.element.serviceUrlInput, data.input);
       cy.contains(testData.fullUrl.expectedError).should("be.visible");
     });
   });
@@ -31,8 +27,8 @@ describe('L3: Single Fields Check', () => {
     it(`L3: Check Wrong Input for Retries: ${data.input}`, () => {
       serviceCreatePage.switchMode(testData.retries.mode)._expendAdvancedFields();
       serviceCreatePage._fillFullUrl(faker.internet.url());
-      serviceCreatePage.typeNum(
-        serviceCreatePage.element.retriesInput(),
+      cy.typeNum(
+        serviceCreatePage.element.retriesInput,
         data.input,
       );
       serviceCreatePage.submitForm();
@@ -44,8 +40,8 @@ describe('L3: Single Fields Check', () => {
     it(`L3: Check Wrong Input for Connection timeout: ${data.input}`, () => {
       serviceCreatePage.switchMode(testData.connTimeout.mode)._expendAdvancedFields();
       serviceCreatePage._fillFullUrl(faker.internet.url());
-      serviceCreatePage.typeNum(
-        serviceCreatePage.element.connTimeoutInput(),
+      cy.typeNum(
+        serviceCreatePage.element.connTimeoutInput,
         data.input,
       );
       serviceCreatePage.submitForm();
@@ -57,8 +53,8 @@ describe('L3: Single Fields Check', () => {
     it(`L3: Check Wrong Input for Write timeout: ${data.input}`, () => {
       serviceCreatePage.switchMode(testData.writeTimeout.mode)._expendAdvancedFields();
       serviceCreatePage._fillFullUrl(faker.internet.url());
-      serviceCreatePage.typeNum(
-        serviceCreatePage.element.writeTimeoutInput(),
+      cy.typeNum(
+        serviceCreatePage.element.writeTimeoutInput,
         data.input,
       );
       serviceCreatePage.submitForm();
@@ -70,8 +66,8 @@ describe('L3: Single Fields Check', () => {
     it(`L3: Check Wrong Input for Read timeout: ${data.input}`, () => {
       serviceCreatePage.switchMode(testData.readTimeout.mode)._expendAdvancedFields();
       serviceCreatePage._fillFullUrl(faker.internet.url());
-      serviceCreatePage.typeNum(
-        serviceCreatePage.element.readTimeoutInput(),
+      cy.typeNum(
+        serviceCreatePage.element.readTimeoutInput,
         data.input,
       );
       serviceCreatePage.submitForm();
@@ -83,10 +79,7 @@ describe('L3: Single Fields Check', () => {
     it(`L3: Check Wrong Input for Client certificate: ${data.input}`, () => {
       serviceCreatePage.switchMode(testData.clientCert.mode)._expendAdvancedFields();
       serviceCreatePage._fillFullUrl(faker.internet.url());
-      serviceCreatePage.typeText(
-        serviceCreatePage.element.clientCertInput(),
-        data.input,
-      );
+      cy.typeText(serviceCreatePage.element.clientCertInput, data.input);
       serviceCreatePage.submitForm();
       cy.contains(testData.clientCert.expectedError).should("be.visible");
     });
@@ -96,8 +89,8 @@ describe('L3: Single Fields Check', () => {
     it(`L3: Check Wrong Input for Client certificate: ${data.input}`, () => {
       serviceCreatePage.switchMode(testData.caCert.mode)._expendAdvancedFields();
       serviceCreatePage._fillFullUrl(faker.internet.url());
-      serviceCreatePage.typeText(
-        serviceCreatePage.element.caCertsInput(),
+      cy.typeText(
+        serviceCreatePage.element.caCertsInput,
         data.input,
       );
       serviceCreatePage.submitForm()
@@ -108,8 +101,8 @@ describe('L3: Single Fields Check', () => {
   testData.name.scenarios.forEach((data) => {
     it(`L3: Check Wrong Input for Name: ${data.input}`, () => {
       serviceCreatePage.switchMode(testData.name.mode);
-      serviceCreatePage.typeText(
-        serviceCreatePage.element.serviceNameInput(),
+      cy.typeText(
+        serviceCreatePage.element.serviceNameInput,
         data.input,
       );
       cy.contains(testData.name.expectedError).should("be.visible");
@@ -120,8 +113,8 @@ describe('L3: Single Fields Check', () => {
     it(`L3: Check Wrong Input for Tags: ${data.input}`, () => {
       serviceCreatePage.switchMode(testData.tags.mode)._expandTagFields();
       serviceCreatePage._fillFullUrl(faker.internet.url());
-      serviceCreatePage.typeText(
-        serviceCreatePage.element.tagsInput(),
+      cy.typeText(
+        serviceCreatePage.element.tagsInput,
         data.input,
       );
       serviceCreatePage.submitForm();
@@ -132,8 +125,8 @@ describe('L3: Single Fields Check', () => {
   testData.host.scenarios.forEach((data) => {
     it(`L3: Check Wrong Input for Host: ${data.input}`, () => {
       serviceCreatePage.switchMode(testData.host.mode);
-      serviceCreatePage.typeSpecialText(
-        serviceCreatePage.element.hostInput(),
+      cy.typeSpecialText(
+        serviceCreatePage.element.hostInput,
         data.input,
       );
       cy.contains(data.expectedError).should("be.visible");
@@ -143,12 +136,12 @@ describe('L3: Single Fields Check', () => {
   testData.path.scenarios.forEach((data) => {
     it(`L3: Check Wrong Input for Path: ${data.input}`, () => {
       serviceCreatePage.switchMode(testData.path.mode);
-      serviceCreatePage.typeText(
-        serviceCreatePage.element.hostInput(),
+      cy.typeText(
+        serviceCreatePage.element.hostInput,
         faker.internet.domainName(),
       );
-      serviceCreatePage.typeSpecialText(
-        serviceCreatePage.element.pathInput(),
+      cy.typeSpecialText(
+        serviceCreatePage.element.pathInput,
         data.input,
       );
       cy.contains(data.expectedError).should("be.visible");
@@ -158,8 +151,8 @@ describe('L3: Single Fields Check', () => {
   testData.port.scenarios.forEach((data) => {
     it(`L3: Check Wrong Input for Port: ${data.input}`, () => {
       serviceCreatePage.switchMode(testData.port.mode);
-      serviceCreatePage.typeText(
-        serviceCreatePage.element.portInput(),
+      cy.typeText(
+        serviceCreatePage.element.portInput,
         data.input,
       );
       cy.contains(testData.port.expectedError).should("be.visible");
