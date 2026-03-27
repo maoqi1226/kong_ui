@@ -7,12 +7,12 @@ describe('L3: Single Fields Check', () => {
   const testData = getSingleFieldsScenarios();
 
   beforeEach(() => {
-    cy.log("L3用例执行前准备");
+    cy.log("L3 preparing");
     serviceCreatePage.visit();
   });
 
   afterEach(() => {
-    cy.log("L3用例执行后清理");
+    cy.log("L3 cleaning up");
   });
 
   testData.fullUrl.scenarios.forEach((data) => {

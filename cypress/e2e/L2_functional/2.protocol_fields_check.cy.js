@@ -6,13 +6,13 @@ describe('L2: Required Fields Check', () => {
   const serviceCreatePage = pages.get("servicecreate");
 
   beforeEach(() => {
-    cy.log("L2用例执行前准备");
+    cy.log("L2 preparing");
     serviceCreatePage.visit().switchMode("manual");
     serviceCreatePage._expendAdvancedFields();
   });
 
   afterEach(() => {
-    cy.log("L2用例执行后清理");
+    cy.log("L2 cleaning up");
   });
 
   const testScenarios = getManualFieldsScenarios();

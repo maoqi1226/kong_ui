@@ -1,14 +1,14 @@
 import { faker } from "@faker-js/faker";
 
-// 无 path、clientCert、caCert、tlsVerify 时的场景
+// existing fields: None
 const PROTOCOL_TYPE0 = ["grpc", "grpcs", "tcp", "udp", "tls_passthrough"];
-// 有 path 时的场景
+// existing fields: path
 const PROTOCOL_TYPE1 = ['ws', 'http']
-// 有 path、clientCert、tlsVerify 时的场景
+// existing fields: path、clientCert、tlsVerify
 const PROTOCOL_TYPE2 = ['wss']
-// 有 clientCert、caCert、tlsVerify 时的场景
+// existing fields: clientCert、caCert、tlsVerify
 const PROTOCOL_TYPE3 = ["tls"];
-// 有 path、clientCert、caCert、tlsVerify 时的场景
+// existing fields: path、clientCert、caCert、tlsVerify
 const PROTOCOL_TYPE4 = ['https']
 
 export const getManualFieldsScenarios = () => [

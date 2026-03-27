@@ -1,6 +1,5 @@
 
 
-
 Cypress.Commands.add("typeText", (selector, text) => {
   selector().clear().type(text);
 });

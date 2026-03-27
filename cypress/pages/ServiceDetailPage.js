@@ -10,9 +10,7 @@ class ServiceDetailPage {
       portText: () => cy.get("[data-testid='port-plain-text']"),
       protocolText: () => cy.get("[data-testid='protocol-plain-text']"),
       pathText: () => cy.get("[data-testid='path-property-value']"),
-      // tags: () => cy.get("[data-testid='path-plain-text']"),
       retriesText: () => cy.get("[data-testid='retries-plain-text']"),
-      // 补充缺失的 connTimeout 元素 (请根据实际页面的 data-testid 调整)
       connTimeoutText: () =>
         cy.get("[data-testid='connect_timeout-plain-text']"),
       writeTimeoutText: () =>
@@ -52,7 +50,6 @@ class ServiceDetailPage {
     assertElementTextEquals(this.element.writeTimeoutText, data.writeTimeout);
     assertElementTextEquals(this.element.readTimeoutText, data.readTimeout);
     assertElementTextEquals(this.element.clientCertText, data.clientCert);
-    // this._containsText(this.element.caCertText, data.caCert, 6);
     if (data.caCert){
       const caCertList = data.caCert.split(',').map((item) => item.trim());
       cy.wrap(caCertList).each((item) => {
@@ -79,7 +76,7 @@ class ServiceDetailPage {
   verifyFullUrl(fullUrl) {
     this.element.headerActions().should("be.visible");
     if (fullUrl) {
-      const clearfullUrl = fullUrl.replace(/\/$/, ""); // 随机生成的url末尾偶尔有/
+      const clearfullUrl = fullUrl.replace(/\/$/, ""); //  delete the / in the end (fullUrl is generated randomly)
       const urlRegex = new RegExp(`^${clearfullUrl}:\\d+/?`);
       this.element.endpoint().invoke("text").should("match", urlRegex);
     }

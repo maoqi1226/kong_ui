@@ -1,17 +1,16 @@
 import pages from '../../pages/index';
 import { faker } from "@faker-js/faker";
-import { getSimpleCreateScenarios } from "../../data/serviceCreateDataSimple.js";
 
 describe('L2: Required Fields Check', () => {
   const serviceCreatePage = pages.get("servicecreate");
 
   beforeEach(() => {
-    cy.log("L2用例执行前准备");
+    cy.log("L2 preparing");
     serviceCreatePage.visit()
   });
 
   afterEach(() => {
-    cy.log("L2用例执行后清理");
+    cy.log("L2 cleaning up");
   });
 
   it("L2: [Simple Create] Required Fields Check", () => {

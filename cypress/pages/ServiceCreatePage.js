@@ -108,7 +108,6 @@ class ServiceCreatePage {
   fillFormSimple(data) {
     this.switchMode("simple");
     this._fillFullUrl(data.fullUrl)
-    // cy.typeText(this.element.serviceUrlInput, data.fullUrl);
     if (data.advancedFields) {
       this.element.viewAdvancedFieldsTrigger().click();
       this._fillAdvancedFields(data.advancedFields);
@@ -117,7 +116,6 @@ class ServiceCreatePage {
       this._fillgeneralFieldsFields(data.generalFields);
     }
     this.submitForm();
-    // this.element.serviceCreateSubmitBtn().click();
   }
 
   _fillProtocolFields(protocolFields) {
@@ -166,7 +164,7 @@ class ServiceCreatePage {
       .and("not.be.disabled")
       .click({force: true});
 
-    cy.wait("@submitService", {timeout: 8000}).its("request").should("exist");
+    cy.wait("@submitService", { timeout: 5000 }).its("response").should("exist");
   }
 
   cancelForm() {

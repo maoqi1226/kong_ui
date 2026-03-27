@@ -6,9 +6,9 @@ export const getSingleFieldsScenarios = () => ({
   fullUrl: {
     mode: "simple",
     scenarios: [
-      { input: "api.kong-air.com" }, // 缺少协议
-      { input: "ftp://api.kong-air.com" }, // 非法协议
-      { input: "http://" }, // 只有协议没有 host
+      { input: "api.kong-air.com" }, // without full url
+      { input: "ftp://api.kong-air.com" }, // invalid full url: wrong protocol
+      { input: "http://" }, // invalid full url: only protocol, no host
     ],
     expectedError:
       "The URL must follow a valid format. Example: https://api.kong-air.com/flights",
@@ -52,7 +52,6 @@ export const getSingleFieldsScenarios = () => ({
   name: {
     mode: "simple",
     scenarios: [{ input: "my service" }, { input: "name@" }],
-    // 安全注入测试未做，前端已拦截字符
     expectedError:
       "The name can be any string containing characters, letters, numbers, or the following characters: ., -, _, or ~. Do not use spaces.",
   },
@@ -64,15 +63,15 @@ export const getSingleFieldsScenarios = () => ({
         expectedError:
           "expected printable ascii (except `,` and `/`) or valid utf-8 sequences)",
       },
-      // { input: faker.string.alphanumeric(3000), expectedError: "System error" }, // tag 长度限制, 系统出现未知错误
-      // tag 限制数量用例
+      // { input: faker.string.alphanumeric(3000), expectedError: "System error" }, // too long tags , raising exception
+      // tag number limit
     ],
   },
   host: {
     mode: "manual",
     scenarios: [
-      { input: "api_kong!air.com", expectedError: "Invalid host" }, // 非法字符
-      { input: "   ", expectedError: "Host cannot be empty" }, // 全空格
+      { input: "api_kong!air.com", expectedError: "Invalid host" }, // invalid character
+      { input: "   ", expectedError: "Host cannot be empty" }, // empty
     ],
   },
   path: {

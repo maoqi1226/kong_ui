@@ -6,12 +6,12 @@ describe('L3: Multi Fields Interaction Check', () => {
   const testData = getMultiFieldsScenarios();
 
   beforeEach(() => {
-    cy.log("L3用例执行前准备");
+    cy.log("L3 preparing");
     serviceCreatePage.visit();
   });
 
   afterEach(() => {
-    cy.log("L3用例执行后清理");
+    cy.log("L3 cleaning up");
   });
 
   testData.forEach((data) => {

@@ -6,12 +6,12 @@ describe('L2: Required Fields Check', () => {
   const serviceDetailPage = pages.get("servicedetail");
 
   beforeEach(() => {
-    cy.log("L2用例执行前准备");
+    cy.log("L2 preparing");
     serviceCreatePage.visit();
   });
 
   afterEach(() => {
-    cy.log("L2用例执行后清理");
+    cy.log("L2 cleaning up");
   });
 
   it("L2: cancel create service", () => {
